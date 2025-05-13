@@ -86,7 +86,7 @@ bneq $r5 $r6 Restart
 movi $r0 0x20
 movi $r1 0x08
 jump_l AXI_WRITE
-g_jump_imm endif
+jump endif
 
 Restart:
 no-op
@@ -197,4 +197,4 @@ jump_l Start_Transmission
 
 
 Loop:
-g_jump_imm Loop
+jump Loop

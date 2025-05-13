@@ -1,27 +1,22 @@
-TARGET = out
+TARGET = ./out
 
 IDIR = .
 SDIR = .
-ODIR = .
+ODIR = ./obj
 
 SRC = $(wildcard $(SDIR)/*.cpp)
-OBJ = $(SRC:$(SDIR)/%.c=$(ODIR)/%.o)
+OBJ = $(patsubst $(SDIR)/%.cpp,$(ODIR)/%.o,$(SRC))
 
 CXX = g++
-CXXFLAGS = -I$(IDIR)
-CXXFLAGS += -g -O0
-CXXFLAGS += -Iinclude
-CXXFLAGS += -std=c++17
-
-CFLAGS += -Wall
-SCPATH = /usr/local/systemc-2.3.3
-LIBS = -lm
+CXXFLAGS = -I$(IDIR) -Iinclude -g -O0 -std=c++17 -Wall
 
 $(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -I$(SCPATH)/include -L. -L$(SCPATH)/lib-linux64 -Wl,-rpath $(SCPATH)/lib-linux64 $^ $(LIBS) -o $@ 
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-$(ODIR)/%.o: $(SDIR)/%.c
-	$(CXX) $(CXXFLAGS) $(CFLAGS) -c $< -o $@
+$(ODIR)/%.o: $(SDIR)/%.cpp
+	@mkdir -p $(ODIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(TARGET)
+	$(RM) -r $(ODIR)

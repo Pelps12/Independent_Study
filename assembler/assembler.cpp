@@ -145,7 +145,7 @@ int assemble(std::string input_file, std::string output_file)
         {"sw", {MEM, true, 0x08}},
         {"jump", {JUMP, true, 0x09}}, // JUMP and G-JUMP are very confusing. Jump should be jump-imm
         {"g_jump_imm", {JUMP, true, 0xc}},
-        {"g_jump", {JUMP, false, 0xf}},
+        {"jump_r", {JUMP, false, 0xf}},
         {"beq", {BRANCH, false, 0x06}},
         {"bneq", {BRANCH, false, 0x18}},
         {"no-op", {NO_OP, false, 0xe}},

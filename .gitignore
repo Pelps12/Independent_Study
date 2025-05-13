@@ -9,3 +9,5 @@ project
 .vscode
 obj_dir
 uselss_hw_2
+assembler/obj
+assembler/out
