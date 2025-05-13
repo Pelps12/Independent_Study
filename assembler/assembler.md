@@ -43,21 +43,23 @@ This guide explains how to use the provided assembler to convert assembly code i
 
 - **Supported Instructions**:
 
-| Instruction | Syntax               | Description               |
-| ----------- | -------------------- | ------------------------- |
-| `add`       | `add $rd $rs $rt`    | Add registers             |
-| `sub`       | `sub $rd $rs $rt`    | Subtract registers        |
-| `addi`      | `addi $rt $rs imm`   | Add immediate             |
-| `lw`        | `lw offset($rb) $rd` | Load word from memory     |
-| `sw`        | `sw offset($rb) $rd` | Store word to memory      |
-| `jump`      | `jump label`         | Jump to label (immediate) |
-| `jump_l`    | `jump_l label`       | Jump to label and link    |
-| `beq`       | `beq $rs $rt label`  | Branch if equal           |
-| `int`       | `int 0x01`           | Trigger interrupt         |
-| `iret`      | `iret`               | Return from interrupt     |
-| `btsli`     | `btsli $rd $rs imm`  | Bit shift left immediate  |
-| `btsri`     | `btsri $rd $rs imm`  | Bit shift right immediate |
-| `word`      | `word value`         | Define a data word        |
+| Instruction | Syntax               | Description                           |
+| ----------- | -------------------- | ------------------------------------- |
+| `add`       | `add $rd $rs $rt`    | Add registers                         |
+| `sub`       | `sub $rd $rs $rt`    | Subtract registers                    |
+| `addi`      | `addi $rt $rs imm`   | Add immediate                         |
+| `lw`        | `lw offset($rb) $rd` | Load word from memory                 |
+| `sw`        | `sw offset($rb) $rd` | Store word to memory                  |
+| `jump`      | `jump label`         | Jump to label (immediate)             |
+| `jump_l`    | `jump_l label`       | Jump to label and link                |
+| `beq`       | `beq $rs $rt label`  | Branch if equal                       |
+| `int`       | `int 0x01`           | Trigger interrupt                     |
+| `iret`      | `iret`               | Return from interrupt                 |
+| `btsli`     | `btsli $rd $rs imm`  | Bit shift left immediate              |
+| `btsri`     | `btsri $rd $rs imm`  | Bit shift right immediate             |
+| `mov`       | `mov $dest $src`     | Move register to register (dest 1st)  |
+| `movi`      | `movi $dest imm`     | Move immediate to register (dest 1st) |
+| `word`      | `word value`         | Define a data word                    |
 
 See Full Instruction List for more details.
 
@@ -117,15 +119,16 @@ The generated `output.hex` contains machine code in hexadecimal format.
 
 ## Full Instruction List
 
-| Instruction     | Type   | Syntax               |
-| --------------- | ------ | -------------------- |
-| `add` / `sub`   | ALU    | `add $rd $rs $rt`    |
-| `addi` / `subi` | ALU    | `addi $rt $rs imm`   |
-| `lw` / `sw`     | MEM    | `lw offset($rb) $rd` |
-| `jump`          | JUMP   | `jump label`         |
-| `beq` / `bneq`  | BRANCH | `beq $rs $rt label`  |
-| `word`          | DATA   | `word value`         |
-| `no-op`         | NO_OP  | `no-op`              |
+| Instruction     | Type   | Syntax                             |
+| --------------- | ------ | ---------------------------------- |
+| `add` / `sub`   | ALU    | `add $rd $rs $rt`                  |
+| `addi` / `subi` | ALU    | `addi $rt $rs imm`                 |
+| `lw` / `sw`     | MEM    | `lw offset($rb) $rd`               |
+| `jump`          | JUMP   | `jump label`                       |
+| `beq` / `bneq`  | BRANCH | `beq $rs $rt label`                |
+| `mov` / `movi`  | ALU    | `mov $dest $src`, `movi $dest imm` |
+| `word`          | DATA   | `word value`                       |
+| `no-op`         | NO_OP  | `no-op`                            |
 
 Refer to `assembler.cpp` for the complete mapping of opcodes and command types.
 
