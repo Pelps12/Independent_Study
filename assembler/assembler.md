@@ -2,37 +2,32 @@
 
 This guide explains how to use the provided assembler to convert assembly code into machine code for the target architecture.
 
----
-
 ## Table of Contents
 
-1.  [Building the Assembler](#building-the-assembler)
-2.  [Writing Assembly Code](#writing-assembly-code)
+1.  Building the Assembler
+2.  Writing Assembly Code
 
-    - [Instruction Syntax](#instruction-syntax)
-    - [Registers](#registers)
-    - [Directives](#directives)
+    - Instruction Syntax
+    - Registers
+    - Directives
 
-3.  [Running the Assembler](#running-the-assembler)
-4.  [Full Instruction Set](#full-instruction-set)
-5.  [Notes](#notes)
+3.  Running the Assembler
+4.  Full Instruction Set
 
 ---
 
 ## Building the Assembler
 
-1.  **Prerequisites**  
-    Ensure `g++` is installed.
-2.  **Compile**  
+1.  **Prerequisites**:  
+    Ensure `g++` is installed. No external libraries are required.
+2.  **Compile**:  
     Run the following command to build the assembler:
 
-    bash
+    ```
+    make
+    ```
 
-    CopyEdit
-
-    `make`
-
-    This generates an executable named `out`.
+    This generates an executable named `./out`.
 
 ---
 
@@ -40,23 +35,11 @@ This guide explains how to use the provided assembler to convert assembly code i
 
 ### Instruction Syntax
 
-- **General Format**
-
-  css
-
-  CopyEdit
-
-  `[label:] OPCODE [operands]  [// comment]`
-
-  Example:
-
-  asm
-
-  CopyEdit
-
+- **General Format**:  
+  `[label:] OPCODE [operands] [// comment]`  
+  Example:  
   `Loop: addi $r1 $r1 0x1 // Increment R1`
-
-- **Supported Instructions**
+- **Supported Instructions**:
 
 Instruction
 
@@ -142,29 +125,18 @@ Bit shift right immediate
 
 Define a data word
 
-See the [Full Instruction Set](#full-instruction-set) for categorized types.
+See Full Instruction List for more details.
 
-- **Immediate Values**  
-  Use `0x` for hexadecimal (e.g., `0x1F`) or plain decimal (e.g., `31`).
-- **Memory Access**  
-  Use `offset($register)` syntax.  
-  Example:
-
-  asm
-
-  CopyEdit
-
-  `lw 16($r0) $r3`
-
-  This loads from address `$r0 + 16` into `$r3`.
-
----
+- **Immediate Values**:  
+  Use `0x` for hexadecimal (e.g., `0x1F`) or decimal (e.g., `31`).
+- **Memory Access**:  
+  Use `offset($register)` syntax:  
+  Example: `lw 16($r0) $r3` loads from address `$r0 + 16` into `$r3`.
 
 ### Registers
 
-- **General-Purpose Registers**  
-  `$r0` to `$r12`, `$r25`, `$temp` (alias for `$r31`)
-- **Special Registers**
+- **General-Purpose**: `$r0` to `$r12`, `$r25`, `$temp` (`$r31`).
+- **Special Registers**:
 
 Register
 
@@ -180,7 +152,7 @@ Program counter
 
 `$lr`
 
-Link register
+Link Register
 
 `$int_p`
 
@@ -190,58 +162,39 @@ Interrupt pointer
 
 AXI bus status
 
-Refer to `assembler.cpp` for the full list.
-
----
+Full list in `assembler.cpp`.
 
 ### Directives
 
-1.  **`section`** – Set the current address.  
+1.  `**section**`: Set the current address.  
+    Example: `section 0x100` starts assembling at address `0x100`.
+2.  **Labels**: Define jump targets.  
     Example:
 
-    asm
+    ```
+    Loop:
+      addi $r1 $r1 1
+      jump Loop
+    ```
 
-    CopyEdit
-
-    `section 0x100`
-
-2.  **Labels** – Define jump targets.  
-     Example:
-
-    asm
-
-    CopyEdit
-
-    `Loop:
-addi $r1 $r1 1
-jump Loop`
-
-3.  **Data Definition** – Use `word` to embed raw values.  
-    Example:
-
-    asm
-
-    CopyEdit
-
-    `word 0xDEADBEEF`
+3.  **Data**: Use `word` to embed raw values.  
+    Example: `word 0xDEADBEEF` writes `0xDEADBEEF` to the current address.
 
 ---
 
 ## Running the Assembler
 
-Run the assembler with an input file and specify the output file:
+Execute the assembler with an input file and output file:
 
-bash
+```
+make -B && ./out input.asm output.hex
+```
 
-CopyEdit
-
-`make -B && ./out input.asm output.hex`
-
-The generated `output.hex` contains the machine code in hexadecimal format.
+The generated `output.hex` contains machine code in hexadecimal format.
 
 ---
 
-## Full Instruction Set
+## Full Instruction List
 
 Instruction
 
@@ -291,19 +244,12 @@ NO_OP
 
 `no-op`
 
-Refer to `assembler.cpp` for the full mapping of opcodes and command types.
+Refer to `assembler.cpp` for the complete mapping of opcodes and command types.
 
 ---
 
 ## Notes
 
-- **Two-Pass Assembly**  
-  Labels can be used before they are defined.
-- **Branch Bug**  
-  There must be a `no-op` after a label for correct execution in some cases.
-- **Errors**  
-  The assembler reports errors for:
-
-  - Invalid syntax
-  - Unknown instructions
-  - Unresolved labels
+- **Two-Pass Assembly**: Labels can be used before they are defined.
+- **Branch Bug**: There must be a `no-op` after a label.
+- **Errors**: The assembler throws errors for invalid syntax, unknown instructions, or unresolved labels.
