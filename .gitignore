@@ -1,0 +1,11 @@
+project
+*.bit
+*.mcs
+*.prm
+*.jou
+*.log
+*.vcd
+.Xil
+.vscode
+obj_dir
+uselss_hw_2

@@ -1,0 +1,88 @@
+
+set_property MARK_DEBUG true [get_nets int_flag_out_OBUF]
+set_property MARK_DEBUG true [get_nets int_flag_OBUF]
+
+
+
+create_debug_core u_ila_0 ila
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 2 [get_debug_cores u_ila_0]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+set_property C_DATA_DEPTH 1024 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL true [get_debug_cores u_ila_0]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+set_property port_width 1 [get_debug_ports u_ila_0/clk]
+connect_debug_port u_ila_0/clk [get_nets [list computer/mem_read_BUFG]]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
+set_property port_width 32 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {pc_from_reg[0]} {pc_from_reg[1]} {pc_from_reg[2]} {pc_from_reg[3]} {pc_from_reg[4]} {pc_from_reg[5]} {pc_from_reg[6]} {pc_from_reg[7]} {pc_from_reg[8]} {pc_from_reg[9]} {pc_from_reg[10]} {pc_from_reg[11]} {pc_from_reg[12]} {pc_from_reg[13]} {pc_from_reg[14]} {pc_from_reg[15]} {pc_from_reg[16]} {pc_from_reg[17]} {pc_from_reg[18]} {pc_from_reg[19]} {pc_from_reg[20]} {pc_from_reg[21]} {pc_from_reg[22]} {pc_from_reg[23]} {pc_from_reg[24]} {pc_from_reg[25]} {pc_from_reg[26]} {pc_from_reg[27]} {pc_from_reg[28]} {pc_from_reg[29]} {pc_from_reg[30]} {pc_from_reg[31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
+set_property port_width 32 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list {S_AXI_0_wdata[0]} {S_AXI_0_wdata[1]} {S_AXI_0_wdata[2]} {S_AXI_0_wdata[3]} {S_AXI_0_wdata[4]} {S_AXI_0_wdata[5]} {S_AXI_0_wdata[6]} {S_AXI_0_wdata[7]} {S_AXI_0_wdata[8]} {S_AXI_0_wdata[9]} {S_AXI_0_wdata[10]} {S_AXI_0_wdata[11]} {S_AXI_0_wdata[12]} {S_AXI_0_wdata[13]} {S_AXI_0_wdata[14]} {S_AXI_0_wdata[15]} {S_AXI_0_wdata[16]} {S_AXI_0_wdata[17]} {S_AXI_0_wdata[18]} {S_AXI_0_wdata[19]} {S_AXI_0_wdata[20]} {S_AXI_0_wdata[21]} {S_AXI_0_wdata[22]} {S_AXI_0_wdata[23]} {S_AXI_0_wdata[24]} {S_AXI_0_wdata[25]} {S_AXI_0_wdata[26]} {S_AXI_0_wdata[27]} {S_AXI_0_wdata[28]} {S_AXI_0_wdata[29]} {S_AXI_0_wdata[30]} {S_AXI_0_wdata[31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
+set_property port_width 9 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list {S_AXI_0_awaddr[0]} {S_AXI_0_awaddr[1]} {S_AXI_0_awaddr[2]} {S_AXI_0_awaddr[3]} {S_AXI_0_awaddr[4]} {S_AXI_0_awaddr[5]} {S_AXI_0_awaddr[6]} {S_AXI_0_awaddr[7]} {S_AXI_0_awaddr[8]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
+set_property port_width 1 [get_debug_ports u_ila_0/probe3]
+connect_debug_port u_ila_0/probe3 [get_nets [list int_flag_OBUF]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
+set_property port_width 1 [get_debug_ports u_ila_0/probe4]
+connect_debug_port u_ila_0/probe4 [get_nets [list p_state_correct_OBUF]]
+create_debug_core u_ila_1 ila
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_1]
+set_property ALL_PROBE_SAME_MU_CNT 2 [get_debug_cores u_ila_1]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_1]
+set_property C_DATA_DEPTH 1024 [get_debug_cores u_ila_1]
+set_property C_EN_STRG_QUAL true [get_debug_cores u_ila_1]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_1]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_1]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_1]
+set_property port_width 1 [get_debug_ports u_ila_1/clk]
+connect_debug_port u_ila_1/clk [get_nets [list uut/iic_i/clk_wiz_0/inst/clk_out1]]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe0]
+set_property port_width 2 [get_debug_ports u_ila_1/probe0]
+connect_debug_port u_ila_1/probe0 [get_nets [list {S_AXI_0_bresp[0]} {S_AXI_0_bresp[1]}]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe1]
+set_property port_width 32 [get_debug_ports u_ila_1/probe1]
+connect_debug_port u_ila_1/probe1 [get_nets [list {S_AXI_0_rdata[0]} {S_AXI_0_rdata[1]} {S_AXI_0_rdata[2]} {S_AXI_0_rdata[3]} {S_AXI_0_rdata[4]} {S_AXI_0_rdata[5]} {S_AXI_0_rdata[6]} {S_AXI_0_rdata[7]} {S_AXI_0_rdata[8]} {S_AXI_0_rdata[9]} {S_AXI_0_rdata[10]} {S_AXI_0_rdata[11]} {S_AXI_0_rdata[12]} {S_AXI_0_rdata[13]} {S_AXI_0_rdata[14]} {S_AXI_0_rdata[15]} {S_AXI_0_rdata[16]} {S_AXI_0_rdata[17]} {S_AXI_0_rdata[18]} {S_AXI_0_rdata[19]} {S_AXI_0_rdata[20]} {S_AXI_0_rdata[21]} {S_AXI_0_rdata[22]} {S_AXI_0_rdata[23]} {S_AXI_0_rdata[24]} {S_AXI_0_rdata[25]} {S_AXI_0_rdata[26]} {S_AXI_0_rdata[27]} {S_AXI_0_rdata[28]} {S_AXI_0_rdata[29]} {S_AXI_0_rdata[30]} {S_AXI_0_rdata[31]}]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe2]
+set_property port_width 1 [get_debug_ports u_ila_1/probe2]
+connect_debug_port u_ila_1/probe2 [get_nets [list i2c_pulse]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe3]
+set_property port_width 1 [get_debug_ports u_ila_1/probe3]
+connect_debug_port u_ila_1/probe3 [get_nets [list iic2intc_irpt_0_OBUF]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe4]
+set_property port_width 1 [get_debug_ports u_ila_1/probe4]
+connect_debug_port u_ila_1/probe4 [get_nets [list int_flag_out_OBUF]]
+create_debug_port u_ila_1 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe5]
+set_property port_width 1 [get_debug_ports u_ila_1/probe5]
+connect_debug_port u_ila_1/probe5 [get_nets [list S_AXI_0_bvalid]]
+create_debug_core u_ila_2 ila
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_2]
+set_property ALL_PROBE_SAME_MU_CNT 2 [get_debug_cores u_ila_2]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_2]
+set_property C_DATA_DEPTH 1024 [get_debug_cores u_ila_2]
+set_property C_EN_STRG_QUAL true [get_debug_cores u_ila_2]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_2]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_2]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_2]
+set_property port_width 1 [get_debug_ports u_ila_2/clk]
+connect_debug_port u_ila_2/clk [get_nets [list s_clk_IBUF_BUFG]]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_2/probe0]
+set_property port_width 1 [get_debug_ports u_ila_2/probe0]
+connect_debug_port u_ila_2/probe0 [get_nets [list pulse_1s]]
+set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
+set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
+set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
+connect_debug_port dbg_hub/clk [get_nets axi_clk_IBUF]
